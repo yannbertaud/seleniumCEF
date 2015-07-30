@@ -6,12 +6,24 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class Example  {
   public static void main(String[] args) {
-    // Path to the ChromeDriver executable.
-    System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+	  
+	// download chrome driver from https://sites.google.com/a/chromium.org/chromedriver/downloads
+	// download cef client from http://www.magpcss.net/cef_downloads/index.php?query=label%3A~Deprecated+label%3ACEF3+label%3Abinary#list
+	  
+	String OS = System.getProperty("os.name").toLowerCase();  
+	System.out.println("operating system: " + OS);
+	String cefBinaryLocation;
+    // Path to the ChromeDriver executable.	
+	if (OS.startsWith("win")) {
+	    System.setProperty("webdriver.chrome.driver", "c:/temp/chromedriver.exe");
+	    cefBinaryLocation = "c:/temp/cef_binary_3.2171.1979_windows32_client/Release/cefclient.exe";
+	} else if (OS.startsWith("mac")) {
+	    System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+	    cefBinaryLocation = "/Users/yannbertaud/Desktop/cefClientMac/cef_binary_3.2171.1979_macosx64_client/Release/cefclient.app/Contents/MacOS";
+	}
     
     // from https://sites.google.com/a/chromium.org/chromedriver/capabilities
     // Path to the CEF executable.
-    String cefBinaryLocation = "/Users/yannbertaud/Desktop/cefClientMac/cef_binary_3.2171.1979_macosx64_client/Release/cefclient.app/Contents/MacOS";
     ChromeOptions options = new ChromeOptions();
 //    options.setBinary(cefBinaryLocation);
 
